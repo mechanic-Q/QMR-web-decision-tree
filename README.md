@@ -163,6 +163,7 @@ camoufox>=0.4.0      — Anti-detection browser (auto-installs Playwright)
 httpcloak>=1.6.0     — HTTP/2+3 TLS fingerprint simulation
 crawl4ai>=0.8.0      — LLM-optimized crawler
 ddgs>=9.0.0          — DuckDuckGo search
+pyyaml>=6.0          — YAML parser (used by Aider adapter)
 ```
 
 ### Node.js (package.json)

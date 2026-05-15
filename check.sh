@@ -77,7 +77,7 @@ echo ""
 # Required CLI tools
 for cmd in ddgs node npm python3; do
   if command -v "$cmd" &>/dev/null; then
-    ver=$("$cmd" --version 2>&1 | head -1)
+    ver=$("$cmd" --version 2>&1 | head -1) || true
     ok "  $(printf '%-20s' "$cmd") $ver"
   else
     fail "  $(printf '%-20s' "$cmd") not found in PATH"

@@ -6,6 +6,7 @@
 #
 # Requires: camofox-browser installed and running
 # Start server: node node_modules/camofox-browser/bin/camofox-browser.js
+set -euo pipefail
 
 SERVER_PID=""
 cleanup() {

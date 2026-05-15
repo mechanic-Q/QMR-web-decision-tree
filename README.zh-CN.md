@@ -158,6 +158,7 @@ camoufox>=0.4.0      — 反检测浏览器（自动安装 Playwright）
 httpcloak>=1.6.0     — HTTP/2+3 TLS 指纹模拟
 crawl4ai>=0.8.0      — LLM 优化爬虫
 ddgs>=9.0.0          — DuckDuckGo 搜索
+pyyaml>=6.0          — YAML 解析器（Aider 适配器使用）
 ```
 
 ### Node.js（package.json）

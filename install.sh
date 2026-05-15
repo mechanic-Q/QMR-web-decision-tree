@@ -29,6 +29,11 @@ DRY_RUN=false
 AGENTS_GENERATED=false
 MODE="auto"  # auto | project | global
 
+# Temp file cleanup on exit/interrupt
+_INSTALL_TEMP_FILES=()
+_cleanup_temps() { rm -f "${_INSTALL_TEMP_FILES[@]}" 2>/dev/null || true; }
+trap _cleanup_temps EXIT INT TERM
+
 # ------------------------------------------------------------------
 # Parse args
 # ------------------------------------------------------------------
@@ -107,7 +112,7 @@ install_deps() {
     if $DRY_RUN; then
       info "[DRY-RUN] pip3 install -r \"$REPO_DIR/requirements.txt\" --break-system-packages"
     else
-      PIP_LOG=$(mktemp)
+      PIP_LOG=$(mktemp) && _INSTALL_TEMP_FILES+=("$PIP_LOG")
       if pip3 install -r "$REPO_DIR/requirements.txt" --break-system-packages > "$PIP_LOG" 2>&1; then
         tail -3 "$PIP_LOG"
         ok "Python dependencies installed"
@@ -123,7 +128,7 @@ install_deps() {
     if $DRY_RUN; then
       info "[DRY-RUN] pip install -r \"$REPO_DIR/requirements.txt\" --break-system-packages"
     else
-      PIP_LOG=$(mktemp)
+      PIP_LOG=$(mktemp) && _INSTALL_TEMP_FILES+=("$PIP_LOG")
       if pip install -r "$REPO_DIR/requirements.txt" --break-system-packages > "$PIP_LOG" 2>&1; then
         tail -3 "$PIP_LOG"
         ok "Python dependencies installed"
