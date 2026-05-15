@@ -11,8 +11,8 @@ mkdir -p "$CURSOR_RULES"
 
 MDC_FILE="$CURSOR_RULES/qmr-web-tool.mdc"
 
-# Extract the body (skip YAML frontmatter)
-BODY=$(awk 'BEGIN {skip=1} /^---$/ {if (skip) {skip=0; next} else {skip=2; next}} skip != 2' "$SKILL_FILE")
+# Extract body after YAML frontmatter (everything after second '---')
+BODY=$(awk '/^---$/ {c++; next} c >= 2' "$SKILL_FILE")
 
 cat > "$MDC_FILE" << CURSOR
 ---

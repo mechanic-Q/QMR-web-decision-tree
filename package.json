@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "QMR-web-tool — Intelligent Web Tool Decision Tree for AI Coding Agents",
   "private": true,
-  "scripts": {
-    "install": "npm install --save-dev camofox-browser"
-  },
   "devDependencies": {
     "camofox-browser": "^2.4.0"
   }

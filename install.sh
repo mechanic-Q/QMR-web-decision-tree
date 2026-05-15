@@ -26,6 +26,7 @@ warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
 fail()  { echo -e "${RED}[FAIL]${NC}  $*"; }
 
 DRY_RUN=false
+AGENTS_GENERATED=false
 MODE="auto"  # auto | project | global
 
 # ------------------------------------------------------------------
@@ -87,7 +88,7 @@ _detect_agents() {
 echo ""
 echo "--- Step 1: Detecting AI Coding Agents ---"
 AGENTS=($(_detect_agents))
-for a in "${AGENTS[@]}"; do info "Detected: $a"; done
+for a in "${AGENTS[@]+"${AGENTS[@]}"}"; do info "Detected: $a"; done
 
 if [ ${#AGENTS[@]} -eq 0 ]; then
   warn "No AI coding agents detected. Will install skill globally."
@@ -127,8 +128,9 @@ install_deps() {
   if $DRY_RUN; then
     info "[DRY-RUN] playwright install chromium"
   else
-    if python3 -c "from playwright.sync_api import sync_playwright" 2>/dev/null; then
-      ok "Playwright already installed"
+    PLAYWRIGHT_CACHE="$HOME/.cache/ms-playwright"
+    if [ -d "$PLAYWRIGHT_CACHE" ] && [ "$(ls -A "$PLAYWRIGHT_CACHE" 2>/dev/null)" ]; then
+      ok "Playwright browsers already cached"
     else
       info "Installing Playwright browsers..."
       python3 -m playwright install chromium 2>&1 | tail -3
@@ -140,8 +142,8 @@ install_deps() {
   if $DRY_RUN; then
     info "[DRY-RUN] python3 -m camoufox fetch"
   else
-    if python3 -c "from camoufox.sync_api import Camoufox; Camoufox()" --help 2>/dev/null; then
-      ok "Camoufox already downloaded"
+    if python3 -c "import camoufox" 2>/dev/null; then
+      ok "Camoufox package installed (binary auto-downloaded on first use)"
     else
       info "Downloading camoufox browser (~300 MB)..."
       python3 -m camoufox fetch 2>&1 | tail -3
@@ -158,7 +160,7 @@ install_deps() {
       if $DRY_RUN; then
         info "[DRY-RUN] npm install --save-dev camofox-browser"
       else
-        cd "$PROJECT_ROOT" && npm install --save-dev camofox-browser 2>&1 | tail -3
+        (cd "$PROJECT_ROOT" && npm install --save-dev camofox-browser) 2>&1 | tail -3
         ok "camofox-browser installed"
       fi
     fi
@@ -256,6 +258,7 @@ agent's skill directory.
 AGENTS
 
   ok "AGENTS.md created at $AGENTS_MD"
+  AGENTS_GENERATED=true
 }
 
 generate_agents_md
@@ -294,7 +297,9 @@ else
   info "Copy it to your agent's skill directory manually."
 fi
 
-ok "AGENTS.md generated for cross-platform compatibility"
+if $AGENTS_GENERATED; then
+  ok "AGENTS.md generated for cross-platform compatibility"
+fi
 info "Run ./check.sh anytime to verify tool availability"
 info ""
 info "If you encounter issues with Chinese network, use mirror:"

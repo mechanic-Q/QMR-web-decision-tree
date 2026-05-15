@@ -47,10 +47,17 @@ for entry in "${PYTHON_TOOLS[@]}"; do
     ok "  $(printf '%-20s' "$name") installed"
     $VERBOSE && python3 -c "
 $imp
-try:
-    mod = __import__('${name//_/}')
-    print(f'    version: {getattr(mod, \"__version__\", \"unknown\")}')
-except: pass
+import inspect, importlib
+# Find the actual top-level module from the import statement
+for name in ['scrapling', 'camoufox', 'httpcloak', 'crawl4ai', 'ddgs', 'playwright']:
+    try:
+        m = importlib.import_module(name)
+        v = getattr(m, '__version__', None)
+        if v:
+            print(f'    {name} version: {v}')
+            break
+    except Exception:
+        continue
 " 2>/dev/null || true
   else
     fail "  $(printf '%-20s' "$name") MISSING — pip install it"
@@ -102,8 +109,8 @@ for p in "node_modules/camofox-browser/bin/camofox-browser.js" \
     break
   fi
 done
-if [ ! -f "$(find . -name 'camofox-browser.js' 2>/dev/null | head -1)" ] && \
-   [ ! -f "$HOME/node_modules/camofox-browser/bin/camofox-browser.js" ]; then
+CB_JS=$(find . -name 'camofox-browser.js' 2>/dev/null | head -1 || true)
+if [ ! -f "${CB_JS:-}" ] && [ ! -f "$HOME/node_modules/camofox-browser/bin/camofox-browser.js" ]; then
   warn "  camofox-browser           not installed — npm install --save-dev camofox-browser"
 fi
 
