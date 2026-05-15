@@ -18,5 +18,5 @@ BODY=$(awk '/^---$/ {c++; next} c >= 2' "$SKILL_FILE")
   echo "# Added by install.sh on $(date)"
   echo "# ============================================="
   echo ""
-  echo "$BODY"
+  printf '%s' "$BODY"
 } >> "$WINDSURF_FILE"

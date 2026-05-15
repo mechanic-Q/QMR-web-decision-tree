@@ -14,12 +14,14 @@ MDC_FILE="$CURSOR_RULES/qmr-web-tool.mdc"
 # Extract body after YAML frontmatter (everything after second '---')
 BODY=$(awk '/^---$/ {c++; next} c >= 2' "$SKILL_FILE")
 
-cat > "$MDC_FILE" << CURSOR
+{
+  cat << 'MDCHEADER'
 ---
 description: "scrape|scraping|crawl|search|research|investigate|web-search|anti-bot|cloudflare-bypass|fetch|spider"
 globs: ["*"]
 alwaysApply: true
 ---
 
-$BODY
-CURSOR
+MDCHEADER
+  printf '%s' "$BODY"
+} > "$MDC_FILE"

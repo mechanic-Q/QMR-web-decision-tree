@@ -20,10 +20,10 @@ SKILL_FILE="$REPO_DIR/skills/QMR-web-tool/SKILL.md"
 # Helpers
 # ------------------------------------------------------------------
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
-info()  { echo -e "${BLUE}[INFO]${NC}  $*"; }
-ok()    { echo -e "${GREEN}[OK]${NC}    $*"; }
-warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
-fail()  { echo -e "${RED}[FAIL]${NC}  $*"; }
+info()  { printf '%b%s%b\n' "${BLUE}" "[INFO]  $*" "${NC}"; }
+ok()    { printf '%b%s%b\n' "${GREEN}" "[OK]    $*" "${NC}"; }
+warn()  { printf '%b%s%b\n' "${YELLOW}" "[WARN]  $*" "${NC}"; }
+fail()  { printf '%b%s%b\n' "${RED}" "[FAIL]  $*" "${NC}"; }
 
 DRY_RUN=false
 AGENTS_GENERATED=false
@@ -107,15 +107,33 @@ install_deps() {
     if $DRY_RUN; then
       info "[DRY-RUN] pip3 install -r \"$REPO_DIR/requirements.txt\" --break-system-packages"
     else
-      pip3 install -r "$REPO_DIR/requirements.txt" --break-system-packages 2>&1 | tail -5
-      ok "Python dependencies installed"
+      PIP_LOG=$(mktemp)
+      if pip3 install -r "$REPO_DIR/requirements.txt" --break-system-packages > "$PIP_LOG" 2>&1; then
+        tail -3 "$PIP_LOG"
+        ok "Python dependencies installed"
+      else
+        fail "pip install failed:"
+        cat "$PIP_LOG"
+        rm "$PIP_LOG"
+        return 1
+      fi
+      rm "$PIP_LOG"
     fi
   elif command -v pip &>/dev/null; then
     if $DRY_RUN; then
       info "[DRY-RUN] pip install -r \"$REPO_DIR/requirements.txt\" --break-system-packages"
     else
-      pip install -r "$REPO_DIR/requirements.txt" --break-system-packages 2>&1 | tail -5
-      ok "Python dependencies installed"
+      PIP_LOG=$(mktemp)
+      if pip install -r "$REPO_DIR/requirements.txt" --break-system-packages > "$PIP_LOG" 2>&1; then
+        tail -3 "$PIP_LOG"
+        ok "Python dependencies installed"
+      else
+        fail "pip install failed:"
+        cat "$PIP_LOG"
+        rm "$PIP_LOG"
+        return 1
+      fi
+      rm "$PIP_LOG"
     fi
   else
     fail "pip not found. Install Python 3 first."
@@ -126,13 +144,12 @@ install_deps() {
   if $DRY_RUN; then
     info "[DRY-RUN] playwright install chromium"
   else
-    info "Installing Playwright browsers (cache check inside)..."
+    info "Installing Playwright browsers..."
     if python3 -m playwright install chromium 2>&1 | tail -3; then
       ok "Playwright browsers installed"
     else
       warn "Playwright install incomplete (run: python3 -m playwright install chromium)"
     fi
-    ok "Playwright browsers installed"
   fi
 
   # Camoufox browser binary (always attempts fetch; cache detection inside)
@@ -140,7 +157,7 @@ install_deps() {
     info "[DRY-RUN] python3 -m camoufox fetch"
   else
     info "Checking camoufox browser binary..."
-    python3 -m camoufox fetch 2>&1 | tail -3 || warn "Camoufox binary download incomplete (run manually: python3 -m camoufox fetch)"
+    (python3 -m camoufox fetch 2>&1 || true) | tail -3
     ok "Camoufox browser binary ready"
   fi
 

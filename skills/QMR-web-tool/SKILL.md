@@ -17,16 +17,21 @@ description: "scrape|scraping|crawl|search|research|investigate|web-search|anti-
 ```bash
 python3 -c "
 tools = {
-    'scrapling': 'from scrapling.fetchers import Fetcher',
-    'stealthy': 'from scrapling.fetchers import StealthyFetcher',
-    'camoufox': 'from camoufox.sync_api import Camoufox',
-    'httpcloak': 'import httpcloak',
-    'crawl4ai': 'import crawl4ai',
+    'scrapling': ('scrapling.fetchers', 'Fetcher'),
+    'stealthy': ('scrapling.fetchers', 'StealthyFetcher'),
+    'camoufox': ('camoufox.sync_api', 'Camoufox'),
+    'httpcloak': ('httpcloak', None),
+    'crawl4ai': ('crawl4ai', None),
 }
-for name, imp in tools.items():
+for name, (mod_path, obj) in tools.items():
     try:
-        exec(imp); print(f'  [OK] {name}')
-    except Exception as e: print(f'  [--] {name}: {e}')
+        import importlib
+        m = importlib.import_module(mod_path)
+        if obj:
+            getattr(m, obj)
+        print(f'  [OK] {name}')
+    except Exception as e:
+        print(f'  [--] {name}: {e}')
 
 import os, pathlib
 # Check camofox-browser (Node.js REST server)
@@ -170,7 +175,7 @@ except Exception as e:
 - scrapling `Fetcher.impersonate='chrome'` 才是通过 curl_cffi 实现 **TLS 指纹模拟**（HTTP 层）
 - Cloudflare Bot Management 使用 TLS ClientHello 指纹（JA3/JA4 fingerprinting）检测自动化工具
 - `StealthyFetcher` + `solve_cloudflare=True` + `hide_canvas=True` 都无法改变 TLS 指纹
-- 真正的 TLS 指纹绕过方案：camoufox（C++ 层）或 httpcloak（Go，需自行编译）
+- 真正的 TLS 指纹绕过方案：camoufox（C++ 层）或 httpcloak（HTTP 层预编译）
 
 **Cloudflare 防护等级区分：**
 | 等级 | 检测方式 | 绕过方案 |

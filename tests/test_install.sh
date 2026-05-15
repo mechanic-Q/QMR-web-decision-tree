@@ -153,7 +153,7 @@ echo ""
 ok "$TESTS_PASS / $TESTS_RUN tests passed"
 
 if [ "$TESTS_PASS" -eq "$TESTS_RUN" ]; then
-    echo -e "${GREEN}All tests passed!${NC}"
+    printf '%b%s%b\n' "${GREEN}" "All tests passed!" "${NC}"
 else
     echo -e "${RED}$((TESTS_RUN - TESTS_PASS)) tests FAILED${NC}"
     exit 1

@@ -11,14 +11,16 @@
 # ============================================================================
 set -euo pipefail
 
+CHECK_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 VERBOSE=false
 [[ "${1:-}" == "--verbose" ]] && VERBOSE=true
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
-info()  { echo -e "${BLUE}[INFO]${NC}  $*"; }
-ok()    { echo -e "${GREEN}[OK]${NC}    $*"; }
-warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
-fail()  { echo -e "${RED}[FAIL]${NC}  $*"; }
+info()  { printf '%b%s%b\n' "${BLUE}" "[INFO]  $*" "${NC}"; }
+ok()    { printf '%b%s%b\n' "${GREEN}" "[OK]    $*" "${NC}"; }
+warn()  { printf '%b%s%b\n' "${YELLOW}" "[WARN]  $*" "${NC}"; }
+fail()  { printf '%b%s%b\n' "${RED}" "[FAIL]  $*" "${NC}"; }
 
 echo ""
 echo "=============================================="
@@ -59,10 +61,10 @@ for entry in "${PYTHON_TOOLS[@]}"; do
   imp="${entry#*:}"
   if python3 -c "$imp" 2>/dev/null; then
     ok "  $(printf '%-20s' "$name") installed"
-    $VERBOSE && python3 -c "
-import importlib
+    $VERBOSE && MODULE="${IMPORT_NAMES[$name]}" python3 -c "
+import os, importlib
 try:
-    m = importlib.import_module('${IMPORT_NAMES[$name]}')
+    m = importlib.import_module(os.environ['MODULE'])
     v = getattr(m, '__version__', 'unknown')
     print(f'    version: {v}')
 except Exception:
@@ -110,16 +112,19 @@ else
 fi
 
 # camofox-browser Node.js
-for p in "node_modules/camofox-browser/bin/camofox-browser.js" \
-         "../node_modules/camofox-browser/bin/camofox-browser.js" \
-         "$HOME/node_modules/camofox-browser/bin/camofox-browser.js"; do
+CB_FOUND=false
+for p in \
+  "$CHECK_DIR/node_modules/camofox-browser/bin/camofox-browser.js" \
+  "$(pwd)/node_modules/camofox-browser/bin/camofox-browser.js" \
+  "$HOME/node_modules/camofox-browser/bin/camofox-browser.js" \
+  "node_modules/camofox-browser/bin/camofox-browser.js"; do
   if [ -f "$p" ]; then
     ok "  camofox-browser           found at $p"
+    CB_FOUND=true
     break
   fi
 done
-CB_JS=$(find . -name 'camofox-browser.js' 2>/dev/null | head -1 || true)
-if [ ! -f "${CB_JS:-}" ] && [ ! -f "$HOME/node_modules/camofox-browser/bin/camofox-browser.js" ]; then
+if ! $CB_FOUND; then
   warn "  camofox-browser           not installed — npm install --save-dev camofox-browser"
 fi
 
