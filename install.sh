@@ -35,7 +35,7 @@ MODE="auto"  # auto | project | global
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --dry-run) DRY_RUN=true; shift ;;
-    --project) MODE="project"; PROJECT_DIR="$2"; shift 2 ;;
+    --project) MODE="project"; PROJECT_DIR="${2:?--project requires a path argument}"; shift 2 ;;
     --global)  MODE="global"; shift ;;
     *) echo "Unknown option: $1"; exit 1 ;;
   esac
@@ -60,8 +60,6 @@ if [ "$MODE" = "global" ]; then
   PROJECT_ROOT="$HOME"
 elif [ "$MODE" = "project" ]; then
   PROJECT_ROOT="$PROJECT_DIR"
-elif [ -d .git ]; then
-  PROJECT_ROOT="$(pwd)"
 else
   PROJECT_ROOT="$(pwd)"
 fi
@@ -124,31 +122,26 @@ install_deps() {
     return 1
   fi
 
-  # Playwright browsers (for scrapling DynamicFetcher and camoufox)
+  # Playwright browsers (idempotent — skips already installed)
   if $DRY_RUN; then
     info "[DRY-RUN] playwright install chromium"
   else
-    PLAYWRIGHT_CACHE="$HOME/.cache/ms-playwright"
-    if [ -d "$PLAYWRIGHT_CACHE" ] && [ "$(ls -A "$PLAYWRIGHT_CACHE" 2>/dev/null)" ]; then
-      ok "Playwright browsers already cached"
-    else
-      info "Installing Playwright browsers..."
-      python3 -m playwright install chromium 2>&1 | tail -3
+    info "Installing Playwright browsers (cache check inside)..."
+    if python3 -m playwright install chromium 2>&1 | tail -3; then
       ok "Playwright browsers installed"
+    else
+      warn "Playwright install incomplete (run: python3 -m playwright install chromium)"
     fi
+    ok "Playwright browsers installed"
   fi
 
-  # Camoufox browser binary
+  # Camoufox browser binary (always attempts fetch; cache detection inside)
   if $DRY_RUN; then
     info "[DRY-RUN] python3 -m camoufox fetch"
   else
-    if python3 -c "import camoufox" 2>/dev/null; then
-      ok "Camoufox package installed (binary auto-downloaded on first use)"
-    else
-      info "Downloading camoufox browser (~300 MB)..."
-      python3 -m camoufox fetch 2>&1 | tail -3
-      ok "Camoufox browser downloaded"
-    fi
+    info "Checking camoufox browser binary..."
+    python3 -m camoufox fetch 2>&1 | tail -3 || warn "Camoufox binary download incomplete (run manually: python3 -m camoufox fetch)"
+    ok "Camoufox browser binary ready"
   fi
 
   # Node.js packages

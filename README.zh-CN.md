@@ -154,12 +154,10 @@ bash examples/interactive.sh
 
 ```
 scrapling>=0.4.0     — 网页抓取框架
-camoufox>=0.4.0      — 反检测浏览器
+camoufox>=0.4.0      — 反检测浏览器（自动安装 Playwright）
 httpcloak>=1.6.0     — HTTP/2+3 TLS 指纹模拟
 crawl4ai>=0.8.0      — LLM 优化爬虫
 ddgs>=9.0.0          — DuckDuckGo 搜索
-playwright>=1.50.0   — 浏览器自动化
-python-dotenv>=1.0.0 — 环境变量配置
 ```
 
 ### Node.js（package.json）

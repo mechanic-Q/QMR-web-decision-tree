@@ -36,7 +36,21 @@ PYTHON_TOOLS=(
   "playwright:from playwright.sync_api import sync_playwright"
 )
 
-COLUMNS=62
+# Map entry name to top-level import name for version detection
+_IMPORT_NAMES=(
+  "scrapling:scrapling"
+  "stealthy:scrapling"
+  "camoufox:camoufox"
+  "httpcloak:httpcloak"
+  "crawl4ai:crawl4ai"
+  "ddgs:ddgs"
+  "playwright:playwright"
+)
+declare -A IMPORT_NAMES
+for e in "${_IMPORT_NAMES[@]}"; do
+  k="${e%%:*}"; v="${e#*:}"
+  IMPORT_NAMES["$k"]="$v"
+done
 
 # Python tools
 info "Python libraries:"
@@ -46,18 +60,13 @@ for entry in "${PYTHON_TOOLS[@]}"; do
   if python3 -c "$imp" 2>/dev/null; then
     ok "  $(printf '%-20s' "$name") installed"
     $VERBOSE && python3 -c "
-$imp
-import inspect, importlib
-# Find the actual top-level module from the import statement
-for name in ['scrapling', 'camoufox', 'httpcloak', 'crawl4ai', 'ddgs', 'playwright']:
-    try:
-        m = importlib.import_module(name)
-        v = getattr(m, '__version__', None)
-        if v:
-            print(f'    {name} version: {v}')
-            break
-    except Exception:
-        continue
+import importlib
+try:
+    m = importlib.import_module('${IMPORT_NAMES[$name]}')
+    v = getattr(m, '__version__', 'unknown')
+    print(f'    version: {v}')
+except Exception:
+    pass
 " 2>/dev/null || true
   else
     fail "  $(printf '%-20s' "$name") MISSING — pip install it"

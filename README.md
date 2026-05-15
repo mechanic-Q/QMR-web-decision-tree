@@ -159,12 +159,10 @@ bash examples/interactive.sh
 
 ```
 scrapling>=0.4.0     — Web scraping framework
-camoufox>=0.4.0      — Anti-detection browser
+camoufox>=0.4.0      — Anti-detection browser (auto-installs Playwright)
 httpcloak>=1.6.0     — HTTP/2+3 TLS fingerprint simulation
 crawl4ai>=0.8.0      — LLM-optimized crawler
 ddgs>=9.0.0          — DuckDuckGo search
-playwright>=1.50.0   — Browser automation
-python-dotenv>=1.0.0 — Environment config
 ```
 
 ### Node.js (package.json)
