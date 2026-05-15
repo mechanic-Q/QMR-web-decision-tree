@@ -174,14 +174,17 @@ install_deps() {
   if command -v npm &>/dev/null; then
     if [ -d "$PROJECT_ROOT/node_modules/camofox-browser" ]; then
       ok "camofox-browser already installed in project"
-    else
-      info "Installing camofox-browser..."
-      if $DRY_RUN; then
-        info "[DRY-RUN] npm install --save-dev camofox-browser"
       else
-        (cd "$PROJECT_ROOT" && npm install --save-dev camofox-browser) 2>&1 | tail -3
-        ok "camofox-browser installed"
-      fi
+        info "Installing camofox-browser..."
+        if $DRY_RUN; then
+          info "[DRY-RUN] npm install --save-dev camofox-browser"
+        else
+          if (cd "$PROJECT_ROOT" && npm install --save-dev camofox-browser) 2>&1 | tail -3; then
+            ok "camofox-browser installed"
+          else
+            warn "npm install failed — install manually: npm install --save-dev camofox-browser"
+          fi
+        fi
     fi
   else
     warn "npm not found. Install Node.js to use camofox-browser."
