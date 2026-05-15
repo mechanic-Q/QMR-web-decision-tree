@@ -4,7 +4,11 @@
 Usage:
     python3 examples/simple_scrape.py
 """
-from scrapling.fetchers import Fetcher
+try:
+    from scrapling.fetchers import Fetcher
+except ImportError:
+    print("[--] scrapling not installed — pip install scrapling")
+    exit(1)
 
 try:
     page = Fetcher.get('https://httpbin.org/html')

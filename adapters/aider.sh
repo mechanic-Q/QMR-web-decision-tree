@@ -23,7 +23,7 @@ dest = sys.argv[2]
 with open(conf_file) as f:
     conf = yaml.safe_load(f) or {}
 
-reads = conf.get('read', [])
+reads = conf.get('read') or []
 if isinstance(reads, str):
     reads = [reads]
 

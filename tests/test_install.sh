@@ -49,7 +49,7 @@ echo ""
 
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TEMP_DIR=$(mktemp -d)
-trap "rm -rf $TEMP_DIR" EXIT
+trap 'rm -rf "$TEMP_DIR"' EXIT
 
 info "Temp test directory: $TEMP_DIR"
 

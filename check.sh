@@ -74,9 +74,8 @@ done
 
 echo ""
 
-# CLI tools
-info "CLI tools:"
-for cmd in ddgs go node npm python3; do
+# Required CLI tools
+for cmd in ddgs node npm python3; do
   if command -v "$cmd" &>/dev/null; then
     ver=$("$cmd" --version 2>&1 | head -1)
     ok "  $(printf '%-20s' "$cmd") $ver"
@@ -84,6 +83,13 @@ for cmd in ddgs go node npm python3; do
     fail "  $(printf '%-20s' "$cmd") not found in PATH"
   fi
 done
+
+# Optional CLI tools
+if command -v go &>/dev/null; then
+  ok "  go                       $(go version 2>&1 | head -1)"
+else
+  warn "  go                       not found (optional — for httpcloak Go bindings)"
+fi
 
 echo ""
 

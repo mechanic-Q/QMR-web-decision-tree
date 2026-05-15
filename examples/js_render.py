@@ -4,7 +4,11 @@
 Usage:
     python3 examples/js_render.py
 """
-from scrapling.fetchers import DynamicFetcher
+try:
+    from scrapling.fetchers import DynamicFetcher
+except ImportError:
+    print("[--] scrapling not installed — pip install scrapling")
+    exit(1)
 
 try:
     page = DynamicFetcher.fetch(

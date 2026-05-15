@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Example 4: DuckDuckGo news search with ddgs CLI
+set -euo pipefail
 #
 # Usage:
 #   bash examples/search_news.sh "artificial intelligence"
