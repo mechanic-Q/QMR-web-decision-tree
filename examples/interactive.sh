@@ -7,6 +7,15 @@
 # Requires: camofox-browser installed and running
 # Start server: node node_modules/camofox-browser/bin/camofox-browser.js
 
+SERVER_PID=""
+cleanup() {
+    if [ -n "$SERVER_PID" ]; then
+        kill "$SERVER_PID" 2>/dev/null || true
+        SERVER_PID=""
+    fi
+}
+trap cleanup EXIT INT TERM
+
 # Default: start server in background if not running
 start_server() {
     local CB_PATH
@@ -61,7 +70,4 @@ echo ""
 echo "3. Closing tab..."
 curl -s -X DELETE "$BASE/tabs/$TAB_ID?userId=demo" > /dev/null 2>&1 && echo "   Done" || echo "   (cleanup skipped)"
 
-# Stop server
-if [ -n "${SERVER_PID:-}" ]; then
-    kill "$SERVER_PID" 2>/dev/null && echo "   Server stopped" || true
-fi
+# Server stopped by cleanup trap on EXIT

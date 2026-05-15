@@ -14,9 +14,9 @@ CI_MODE=false
 [[ "${1:-}" == "--ci" ]] && CI_MODE=true
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; BLUE='\033[0;34m'; NC='\033[0m'
-info()  { echo -e "${BLUE}[INFO]${NC}  $*"; }
-ok()    { echo -e "${GREEN}[PASS]${NC}  $*"; }
-fail()  { echo -e "${RED}[FAIL]${NC}  $*"; $CI_MODE && exit 1 || true; }
+info()  { printf '%b%s%b\n' "${BLUE}" "[INFO]  $*" "${NC}"; }
+ok()    { printf '%b%s%b\n' "${GREEN}" "[PASS]  $*" "${NC}"; }
+fail()  { printf '%b%s%b\n' "${RED}" "[FAIL]  $*" "${NC}"; $CI_MODE && exit 1 || true; }
 
 TESTS_RUN=0
 TESTS_PASS=0
@@ -155,6 +155,6 @@ ok "$TESTS_PASS / $TESTS_RUN tests passed"
 if [ "$TESTS_PASS" -eq "$TESTS_RUN" ]; then
     printf '%b%s%b\n' "${GREEN}" "All tests passed!" "${NC}"
 else
-    echo -e "${RED}$((TESTS_RUN - TESTS_PASS)) tests FAILED${NC}"
+    printf '%b%s%b\n' "${RED}" "$((TESTS_RUN - TESTS_PASS)) tests FAILED" "${NC}"
     exit 1
 fi

@@ -23,5 +23,5 @@ alwaysApply: true
 ---
 
 MDCHEADER
-  printf '%s' "$BODY"
+  printf '%s\n' "$BODY"
 } > "$MDC_FILE"

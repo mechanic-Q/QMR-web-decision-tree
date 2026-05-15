@@ -80,7 +80,7 @@ _detect_agents() {
   if [ -d "$PROJECT_ROOT/.clinerules" ] || [ -d "$HOME/Documents/Cline/Rules" ]; then agents+=("cline"); fi
   if [ -f "$PROJECT_ROOT/.windsurfrules" ]; then agents+=("windsurf"); fi
   if [ -f "$PROJECT_ROOT/.aider.conf.yml" ]; then agents+=("aider"); fi
-  echo "${agents[@]}"
+  echo ${agents[@]+"${agents[@]}"}
 }
 
 echo ""
@@ -158,7 +158,11 @@ install_deps() {
   else
     info "Checking camoufox browser binary..."
     (python3 -m camoufox fetch 2>&1 || true) | tail -3
-    ok "Camoufox browser binary ready"
+    if python3 -c "import camoufox; camoufox.get_path('camoufox')" 2>/dev/null; then
+      ok "Camoufox browser binary ready"
+    else
+      warn "Camoufox browser binary not cached — run: python3 -m camoufox fetch"
+    fi
   fi
 
   # Node.js packages
@@ -190,7 +194,7 @@ deploy_skill() {
 
   local ADAPTERS_DIR="$REPO_DIR/adapters"
 
-  for agent in "${AGENTS[@]}"; do
+  for agent in "${AGENTS[@]+"${AGENTS[@]}"}"; do
     local adapter="$ADAPTERS_DIR/$agent.sh"
     if [ -f "$adapter" ]; then
       info "Deploying to $agent..."

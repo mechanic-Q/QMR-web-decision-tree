@@ -33,11 +33,13 @@ for name, (mod_path, obj) in tools.items():
     except Exception as e:
         print(f'  [--] {name}: {e}')
 
-import os, pathlib
+import os, pathlib, sys
 # Check camofox-browser (Node.js REST server)
-# Auto-detect: look in project node_modules and global node_modules
+# Auto-detect: project node_modules, script dir, and global node_modules
+_script_dir = pathlib.Path(sys.argv[0]).parent if sys.argv[0] else pathlib.Path.cwd()
 for p in [
     pathlib.Path.cwd() / 'node_modules' / 'camofox-browser' / 'bin' / 'camofox-browser.js',
+    _script_dir / 'node_modules' / 'camofox-browser' / 'bin' / 'camofox-browser.js',
     pathlib.Path.home() / 'node_modules' / 'camofox-browser' / 'bin' / 'camofox-browser.js',
 ]:
     if p.exists():
@@ -116,7 +118,7 @@ else:
 │   │         "
 │   │
 │   ├─ camoufox 失败 → Archive.org（兜底 1）
-│   │   https://web.archive.org/web/20250101/<url>
+│   │   https://web.archive.org/web/*/<url>
 │   │
 │   ├─ Archive.org 失败 → 搜索引擎缓存（兜底 2）
 │   │   Google: https://webcache.googleusercontent.com/search?q=cache:<url>

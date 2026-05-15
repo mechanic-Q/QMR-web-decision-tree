@@ -169,8 +169,9 @@ ddgs>=9.0.0          — DuckDuckGo search
 
 ```
 camofox-browser ^2.4.0  — Multi-agent shared browser REST API
-agent-browser ^0.27.0   — Interactive browser automation (optional)
 ```
+
+> `agent-browser`  is available separately as a CLI tool. Install globally via `npm install -g agent-browser` if interactive browser automation is needed.
 
 ### Special Install Steps
 

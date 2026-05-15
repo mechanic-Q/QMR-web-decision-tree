@@ -164,8 +164,9 @@ ddgs>=9.0.0          — DuckDuckGo 搜索
 
 ```
 camofox-browser ^2.4.0  — 多智能体共享浏览器 REST API
-agent-browser ^0.27.0   — 交互式浏览器自动化（可选）
 ```
+
+> `agent-browser` 是单独的命令行工具。如需交互式浏览器自动化，通过 `npm install -g agent-browser` 全局安装。
 
 ### 额外安装步骤
 

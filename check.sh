@@ -39,20 +39,17 @@ PYTHON_TOOLS=(
 )
 
 # Map entry name to top-level import name for version detection
-_IMPORT_NAMES=(
-  "scrapling:scrapling"
-  "stealthy:scrapling"
-  "camoufox:camoufox"
-  "httpcloak:httpcloak"
-  "crawl4ai:crawl4ai"
-  "ddgs:ddgs"
-  "playwright:playwright"
-)
-declare -A IMPORT_NAMES
-for e in "${_IMPORT_NAMES[@]}"; do
-  k="${e%%:*}"; v="${e#*:}"
-  IMPORT_NAMES["$k"]="$v"
-done
+_import_name() {
+  case "$1" in
+    scrapling|stealthy) echo "scrapling" ;;
+    camoufox)           echo "camoufox" ;;
+    httpcloak)          echo "httpcloak" ;;
+    crawl4ai)           echo "crawl4ai" ;;
+    ddgs)               echo "ddgs" ;;
+    playwright)         echo "playwright" ;;
+    *)                  echo "" ;;
+  esac
+}
 
 # Python tools
 info "Python libraries:"
@@ -61,7 +58,7 @@ for entry in "${PYTHON_TOOLS[@]}"; do
   imp="${entry#*:}"
   if python3 -c "$imp" 2>/dev/null; then
     ok "  $(printf '%-20s' "$name") installed"
-    $VERBOSE && MODULE="${IMPORT_NAMES[$name]}" python3 -c "
+    $VERBOSE && MODULE="$(_import_name "$name")" python3 -c "
 import os, importlib
 try:
     m = importlib.import_module(os.environ['MODULE'])
