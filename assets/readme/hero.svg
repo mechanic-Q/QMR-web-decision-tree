@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">QMR-web-tool — AI 编程智能体的网络工具决策树</title>
+  <desc id="hero-desc">描述任务后，决策树自动把请求路由到最优的网络抓取、搜索、JS 渲染、反检测、爬取或交互式浏览器工具。右侧为真实决策树的六大分支缩影。</desc>
+
+  <defs>
+    <style>
+      .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="420" rx="24" fill="#0B1120"/>
+  <rect x="0.5" y="0.5" width="1199" height="419" rx="23.5" fill="none" stroke="#1C2A3F" stroke-width="1"/>
+
+  <!-- ============ left: identity ============ -->
+  <g transform="translate(64 58)">
+    <text class="mono" x="0" y="0" font-size="17" fill="#8B98A9" letter-spacing="3">AI CODING AGENTS · WEB TOOL ROUTER</text>
+
+    <text class="mono" x="0" y="56" font-size="56" font-weight="700" fill="#E6EDF3">QMR-web-tool</text>
+    <text class="mono" x="0" y="104" font-size="34" font-weight="700" fill="#2DD4A7">└─ decision-tree</text>
+
+    <text class="sans" x="0" y="152" font-size="23" fill="#C6D2DF">描述你的任务，决策树自动选出</text>
+    <text class="sans" x="0" y="184" font-size="23" fill="#C6D2DF">最优的抓取、搜索与反检测工具</text>
+
+    <!-- stats -->
+    <g transform="translate(0 236)">
+      <text class="mono" x="0" y="0" font-size="40" font-weight="700" fill="#2DD4A7">8</text>
+      <text class="sans" x="0" y="30" font-size="17" fill="#8B98A9">支持平台</text>
+
+      <text class="mono" x="150" y="0" font-size="40" font-weight="700" fill="#E6EDF3">10</text>
+      <text class="sans" x="150" y="30" font-size="17" fill="#8B98A9">网络工具</text>
+
+      <text class="mono" x="300" y="0" font-size="40" font-weight="700" fill="#E6EDF3">10</text>
+      <text class="sans" x="300" y="30" font-size="17" fill="#8B98A9">级降级链</text>
+    </g>
+
+    <!-- command bar -->
+    <g transform="translate(0 304)">
+      <rect x="0" y="0" width="440" height="44" rx="10" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <circle cx="20" cy="22" r="4" fill="#1F3049"/>
+      <text class="mono" x="36" y="29" font-size="19" font-weight="600" fill="#2DD4A7">$ ./install.sh</text>
+      <text class="mono" x="212" y="29" font-size="15" fill="#8B98A9"># 自动检测 · 部署</text>
+      <rect x="404" y="12" width="10" height="20" fill="#2DD4A7" opacity="0.85"/>
+    </g>
+  </g>
+
+  <!-- ============ right: real decision tree ============ -->
+  <g transform="translate(680 56)">
+    <text class="mono" x="0" y="0" font-size="15" fill="#8B98A9" letter-spacing="3">DECISION TREE</text>
+
+    <!-- root -->
+    <circle cx="8" cy="28" r="5" fill="none" stroke="#2DD4A7" stroke-width="2"/>
+    <text class="sans" x="52" y="35" font-size="21" font-weight="600" fill="#E6EDF3">网络操作请求？</text>
+
+    <!-- trunk -->
+    <path d="M 8 36 V 292" stroke="#31435F" stroke-width="1.5" fill="none"/>
+
+    <!-- branch 1: search -->
+    <path d="M 8 80 H 32" stroke="#31435F" stroke-width="1.5" fill="none"/>
+    <circle cx="38" cy="80" r="3.5" fill="#2DD4A7"/>
+    <text class="sans" x="52" y="86" font-size="20" fill="#E6EDF3">搜索信息</text>
+    <text class="mono" x="226" y="86" font-size="20" fill="#2DD4A7">ddgs CLI</text>
+
+    <!-- branch 2: fetch -->
+    <path d="M 8 122 H 32" stroke="#31435F" stroke-width="1.5" fill="none"/>
+    <circle cx="38" cy="122" r="3.5" fill="#2DD4A7"/>
+    <text class="sans" x="52" y="128" font-size="20" fill="#E6EDF3">抓取已知 URL</text>
+    <text class="mono" x="226" y="128" font-size="20" fill="#2DD4A7">webfetch → crawl4ai</text>
+
+    <!-- branch 3: js render -->
+    <path d="M 8 164 H 32" stroke="#31435F" stroke-width="1.5" fill="none"/>
+    <circle cx="38" cy="164" r="3.5" fill="#2DD4A7"/>
+    <text class="sans" x="52" y="170" font-size="20" fill="#E6EDF3">JS 渲染页面</text>
+    <text class="mono" x="226" y="170" font-size="20" fill="#2DD4A7">DynamicFetcher</text>
+
+    <!-- branch 4: anti-detection (accent) -->
+    <path d="M 8 206 H 32" stroke="#31435F" stroke-width="1.5" fill="none"/>
+    <circle cx="38" cy="206" r="3.5" fill="#F5B84D"/>
+    <text class="sans" x="52" y="212" font-size="20" fill="#E6EDF3">反检测 / 反爬</text>
+    <text class="mono" x="226" y="212" font-size="20" fill="#F5B84D">camoufox·httpcloak</text>
+
+    <!-- branch 5: crawl -->
+    <path d="M 8 248 H 32" stroke="#31435F" stroke-width="1.5" fill="none"/>
+    <circle cx="38" cy="248" r="3.5" fill="#2DD4A7"/>
+    <text class="sans" x="52" y="254" font-size="20" fill="#E6EDF3">大规模爬取</text>
+    <text class="mono" x="226" y="254" font-size="20" fill="#2DD4A7">Spider / crawl-site</text>
+
+    <!-- branch 6: interactive -->
+    <path d="M 8 290 H 32" stroke="#31435F" stroke-width="1.5" fill="none"/>
+    <circle cx="38" cy="290" r="3.5" fill="#2DD4A7"/>
+    <text class="sans" x="52" y="296" font-size="20" fill="#E6EDF3">交互式浏览器</text>
+    <text class="mono" x="226" y="296" font-size="20" fill="#2DD4A7">agent-browser-cli</text>
+
+    <!-- trunk cap -->
+    <circle cx="8" cy="292" r="3" fill="#31435F"/>
+  </g>
+</svg>
