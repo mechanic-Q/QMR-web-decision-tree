@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480" role="img" aria-labelledby="pl-title pl-desc">
+  <title id="pl-title">QMR-web-tool 部署到 8 个 AI 编程智能体平台</title>
+  <desc id="pl-desc">install.sh 自动检测已安装的平台并把 skill 部署到 Claude Code、OpenCode、Codex、OpenClaw、Cursor、Cline、Windsurf、Aider 各自的配置目录；Codex、Cline、Cursor、Claude Code 还通过 AGENTS.md 获得跨平台决策树。</desc>
+
+  <defs>
+    <style>
+      .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    </style>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="480" rx="24" fill="#0B1120"/>
+  <rect x="0.5" y="0.5" width="1199" height="479" rx="23.5" fill="none" stroke="#1C2A3F" stroke-width="1"/>
+
+  <!-- header -->
+  <g transform="translate(64 58)">
+    <text class="mono" x="0" y="0" font-size="17" fill="#8B98A9" letter-spacing="3">ONE INSTALLER · 8 ADAPTERS</text>
+    <text class="sans" x="0" y="44" font-size="32" font-weight="700" fill="#E6EDF3">部署到 8 个 AI 编程智能体平台</text>
+    <text class="sans" x="0" y="78" font-size="19" fill="#8B98A9">install.sh 检测你已安装的平台，只部署需要的部分</text>
+    <text class="mono" x="1072" y="44" font-size="18" text-anchor="end" fill="#2DD4A7">./install.sh</text>
+  </g>
+
+  <!-- grid: 4 x 2 cards -->
+  <g transform="translate(64 156)">
+    <!-- row 1 / card: Claude Code -->
+    <g transform="translate(0 0)">
+      <rect width="256" height="130" rx="12" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <path d="M 16 22 H 32" stroke="#2DD4A7" stroke-width="1.5"/>
+      <circle cx="37" cy="22" r="3.5" fill="#2DD4A7"/>
+      <text class="sans" x="48" y="28" font-size="20" font-weight="700" fill="#E6EDF3">Claude Code</text>
+      <text class="mono" x="16" y="58" font-size="20" fill="#8B98A9">.claude/skills/</text>
+      <text class="mono" x="16" y="82" font-size="20" fill="#8B98A9">&lt;name&gt;/SKILL.md</text>
+      <rect x="16" y="94" width="124" height="26" rx="13" fill="none" stroke="#2DD4A7" stroke-width="1"/>
+      <text class="sans" x="78" y="112" font-size="18" fill="#2DD4A7" text-anchor="middle">项目级+全局</text>
+    </g>
+    <!-- card: OpenCode -->
+    <g transform="translate(272 0)">
+      <rect width="256" height="130" rx="12" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <path d="M 16 22 H 32" stroke="#2DD4A7" stroke-width="1.5"/>
+      <circle cx="37" cy="22" r="3.5" fill="#2DD4A7"/>
+      <text class="sans" x="48" y="28" font-size="20" font-weight="700" fill="#E6EDF3">OpenCode</text>
+      <text class="mono" x="16" y="58" font-size="20" fill="#8B98A9">.opencode/skills/</text>
+      <text class="mono" x="16" y="82" font-size="20" fill="#8B98A9">&lt;name&gt;/SKILL.md</text>
+      <rect x="16" y="94" width="124" height="26" rx="13" fill="none" stroke="#2DD4A7" stroke-width="1"/>
+      <text class="sans" x="78" y="112" font-size="18" fill="#2DD4A7" text-anchor="middle">项目级+全局</text>
+    </g>
+    <!-- card: Codex -->
+    <g transform="translate(544 0)">
+      <rect width="256" height="130" rx="12" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <path d="M 16 22 H 32" stroke="#2DD4A7" stroke-width="1.5"/>
+      <circle cx="37" cy="22" r="3.5" fill="#2DD4A7"/>
+      <text class="sans" x="48" y="28" font-size="20" font-weight="700" fill="#E6EDF3">Codex</text>
+      <text class="mono" x="16" y="58" font-size="20" fill="#8B98A9">.agents/skills/</text>
+      <text class="mono" x="16" y="82" font-size="20" fill="#8B98A9">&lt;name&gt;/SKILL.md</text>
+      <rect x="16" y="94" width="124" height="26" rx="13" fill="none" stroke="#2DD4A7" stroke-width="1"/>
+      <text class="sans" x="78" y="112" font-size="18" fill="#2DD4A7" text-anchor="middle">项目级+全局</text>
+    </g>
+    <!-- card: OpenClaw -->
+    <g transform="translate(816 0)">
+      <rect width="256" height="130" rx="12" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <path d="M 16 22 H 32" stroke="#2DD4A7" stroke-width="1.5"/>
+      <circle cx="37" cy="22" r="3.5" fill="#2DD4A7"/>
+      <text class="sans" x="48" y="28" font-size="20" font-weight="700" fill="#E6EDF3">OpenClaw</text>
+      <text class="mono" x="16" y="58" font-size="20" fill="#8B98A9">skills/&lt;name&gt;/</text>
+      <text class="mono" x="16" y="82" font-size="20" fill="#8B98A9">SKILL.md</text>
+      <rect x="16" y="94" width="82" height="26" rx="13" fill="none" stroke="#8B98A9" stroke-width="1"/>
+      <text class="sans" x="57" y="112" font-size="18" fill="#8B98A9" text-anchor="middle">工作区</text>
+    </g>
+
+    <!-- row 2 / card: Cursor -->
+    <g transform="translate(0 146)">
+      <rect width="256" height="130" rx="12" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <path d="M 16 22 H 32" stroke="#2DD4A7" stroke-width="1.5"/>
+      <circle cx="37" cy="22" r="3.5" fill="#2DD4A7"/>
+      <text class="sans" x="48" y="28" font-size="20" font-weight="700" fill="#E6EDF3">Cursor</text>
+      <text class="mono" x="16" y="58" font-size="20" fill="#8B98A9">.cursor/rules/</text>
+      <text class="mono" x="16" y="82" font-size="20" fill="#8B98A9">*.mdc</text>
+      <rect x="16" y="94" width="82" height="26" rx="13" fill="none" stroke="#8B98A9" stroke-width="1"/>
+      <text class="sans" x="57" y="112" font-size="18" fill="#8B98A9" text-anchor="middle">项目级</text>
+    </g>
+    <!-- card: Cline -->
+    <g transform="translate(272 146)">
+      <rect width="256" height="130" rx="12" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <path d="M 16 22 H 32" stroke="#2DD4A7" stroke-width="1.5"/>
+      <circle cx="37" cy="22" r="3.5" fill="#2DD4A7"/>
+      <text class="sans" x="48" y="28" font-size="20" font-weight="700" fill="#E6EDF3">Cline</text>
+      <text class="mono" x="16" y="58" font-size="20" fill="#8B98A9">.clinerules/</text>
+      <text class="mono" x="16" y="82" font-size="20" fill="#8B98A9">*.md</text>
+      <rect x="16" y="94" width="124" height="26" rx="13" fill="none" stroke="#2DD4A7" stroke-width="1"/>
+      <text class="sans" x="78" y="112" font-size="18" fill="#2DD4A7" text-anchor="middle">项目级+全局</text>
+    </g>
+    <!-- card: Windsurf -->
+    <g transform="translate(544 146)">
+      <rect width="256" height="130" rx="12" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <path d="M 16 22 H 32" stroke="#2DD4A7" stroke-width="1.5"/>
+      <circle cx="37" cy="22" r="3.5" fill="#2DD4A7"/>
+      <text class="sans" x="48" y="28" font-size="20" font-weight="700" fill="#E6EDF3">Windsurf</text>
+      <text class="mono" x="16" y="58" font-size="20" fill="#8B98A9">.windsurfrules</text>
+      <text class="sans" x="16" y="82" font-size="18" fill="#5A687C">（追加写入）</text>
+      <rect x="16" y="94" width="82" height="26" rx="13" fill="none" stroke="#8B98A9" stroke-width="1"/>
+      <text class="sans" x="57" y="112" font-size="18" fill="#8B98A9" text-anchor="middle">项目级</text>
+    </g>
+    <!-- card: Aider -->
+    <g transform="translate(816 146)">
+      <rect width="256" height="130" rx="12" fill="#111A2E" stroke="#1C2A3F" stroke-width="1"/>
+      <path d="M 16 22 H 32" stroke="#2DD4A7" stroke-width="1.5"/>
+      <circle cx="37" cy="22" r="3.5" fill="#2DD4A7"/>
+      <text class="sans" x="48" y="28" font-size="20" font-weight="700" fill="#E6EDF3">Aider</text>
+      <text class="mono" x="16" y="58" font-size="20" fill="#8B98A9">.aider.conf.yml</text>
+      <text class="sans" x="16" y="82" font-size="18" fill="#5A687C">（读取列表）</text>
+      <rect x="16" y="94" width="82" height="26" rx="13" fill="none" stroke="#8B98A9" stroke-width="1"/>
+      <text class="sans" x="57" y="112" font-size="18" fill="#8B98A9" text-anchor="middle">项目级</text>
+    </g>
+  </g>
+
+  <!-- AGENTS.md bridge note -->
+  <text class="mono" x="64" y="452" font-size="18" fill="#8B98A9">└─ AGENTS.md 桥接：<tspan fill="#2DD4A7">Codex · Cline · Cursor · Claude Code</tspan> 通过 @AGENTS.md 自动获得决策树</text>
+</svg>
