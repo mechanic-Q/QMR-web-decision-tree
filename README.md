@@ -1,3 +1,17 @@
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="QMR-web-tool：AI 编程智能体的网页工具决策树——描述任务自动选出最优抓取、搜索与反爬工具，8 平台、10 工具、10 级降级链">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platforms-8_AI_coding_agents-34d17b" alt="8 AI coding agent platforms">
+  &nbsp;
+  <img src="https://img.shields.io/badge/web_tools-10_verified-34d17b" alt="10 verified web tools">
+  &nbsp;
+  <img src="https://img.shields.io/badge/fallback-10_level_chain-34d17b" alt="10-level tool downgrade chain">
+  &nbsp;
+  <img src="https://img.shields.io/badge/License-MIT-f5a623" alt="MIT License">
+</p>
+
 # QMR-web-decision-tree
 
 > **Intelligent Web Tool Decision Tree for AI Coding Agents**
@@ -53,6 +67,10 @@ That's it. The installer:
 | **Cline** | `.clinerules/*.md` | Project + global |
 | **Windsurf** | `.windsurfrules` (appended) | Project |
 | **Aider** | `.aider.conf.yml` (read list) | Project |
+
+<p align="center">
+  <img src="./assets/readme/platforms.svg" width="100%" alt="部署到 8 个 AI 编程智能体平台：install.sh 检测已安装平台只部署需要的部分；AGENTS.md 桥接让 Codex、Cline、Cursor、Claude Code 自动获得决策树">
+</p>
 
 ### Cross-platform via AGENTS.md
 
