@@ -1,3 +1,17 @@
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="QMR-web-tool：AI 编程智能体的网页工具决策树——描述任务自动选出最优抓取、搜索与反爬工具，8 平台、10 工具、10 级降级链">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/平台-8_AI_编程智能体-34d17b" alt="支持 8 个 AI 编程智能体平台">
+  &nbsp;
+  <img src="https://img.shields.io/badge/网络工具-10_项验证可用-34d17b" alt="10 项工具全部验证可用">
+  &nbsp;
+  <img src="https://img.shields.io/badge/降级链-10_级自动回退-34d17b" alt="10 级工具自动降级回退">
+  &nbsp;
+  <img src="https://img.shields.io/badge/License-MIT-f5a623" alt="MIT License">
+</p>
+
 # QMR-web-decision-tree
 
 > **智能网络工具决策树 — 为 AI 编程智能体而生**
@@ -48,6 +62,10 @@ chmod +x install.sh && ./install.sh
 | **Cline** | `.clinerules/*.md` | 项目级 + 全局 |
 | **Windsurf** | `.windsurfrules` (追加) | 项目级 |
 | **Aider** | `.aider.conf.yml` (读取列表) | 项目级 |
+
+<p align="center">
+  <img src="./assets/readme/platforms.svg" width="100%" alt="部署到 8 个 AI 编程智能体平台：install.sh 检测已安装平台只部署需要的部分；AGENTS.md 桥接让 Codex、Cline、Cursor、Claude Code 自动获得决策树">
+</p>
 
 ### 跨平台兼容
 
